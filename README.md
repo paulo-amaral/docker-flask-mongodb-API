@@ -18,11 +18,11 @@ Mongodb - Database to save complaints
 
 # Howto install
    # 1 - Clone repo:
-    #git clone https://github.com/paulo-amaral/docker-flask-mongodb-API.git
+     git clone https://github.com/paulo-amaral/docker-flask-mongodb-API.git
    # 2 - Build :
-    #$docker-composer build
+     $docker-composer build
    # 3 - Start and debug:
-    #$docker-composer up
+     $docker-composer up
     
     
     
