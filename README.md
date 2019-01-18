@@ -8,9 +8,11 @@ Check ROSA bot : https://m.me/RosaCFP
 
 # Required Software
 It uses Docker-compose: Compose is a tool for defining and running complex applications with Docker. With Compose, you define a multi-container application in a single file, then spin your application up in a single command which does everything that needs to be done to get it running.
+
 https://docs.docker.com/compose/install/
 
 After installing Docker and Docker-compose on your machine, you can go to the project main folder and type:
+
 $docker-composer build
 $docker-compose up
 
