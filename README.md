@@ -28,7 +28,7 @@ Docker-compose will build the containers necessary for your environment. Basical
 Frontend - Python/flask
 Mongodb - Database to save complaints
 
-# Howto install
+# How to install
    # 1 - Clone repo:
      git clone https://github.com/paulo-amaral/docker-flask-mongodb-API.git
    # 2 - Build :
