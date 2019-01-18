@@ -14,6 +14,7 @@ https://docs.docker.com/compose/install/
 After installing Docker and Docker-compose on your machine, you can go to the project main folder and type:
 
 $docker-composer build
+
 $docker-compose up
 
 Docker-compose will build the containers necessary for your environment. Basically there will be two containers, one with Python, Flask and a few modules and another container with MongoDB bound to the first. The environment structure is as follow:
