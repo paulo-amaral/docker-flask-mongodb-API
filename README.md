@@ -2,10 +2,10 @@
 Dev Environment - Python Flask App API with MongoDB using Docker Compose.
 
 # Motivation
-This deploy was used for a humanitarian project by (UNWOMEN), about reporting sexual harassment in the public service in TIMOR-LESTE country, where we created a chatbot called ROSA.This Chatbot receives the complaints and saves it to a mongobd database for CRUD operations.
+This deploy was used for a humanitarian project by (UNWOMEN). This project permits that some people reporting sexual harassment in the public service in TIMOR-LESTE. We have been created a chatbot called ROSA.This Chatbot receives the complaints and saves it to a mongobd database for CRUD operations.
 
 Check ROSA bot : https://m.me/RosaCFP
-Special thanks 
+
 
 # Required Software
 It uses Docker-compose: Compose is a tool for defining and running complex applications with Docker. With Compose, you define a multi-container application in a single file, then spin your application up in a single command which does everything that needs to be done to get it running.
