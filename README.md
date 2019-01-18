@@ -17,11 +17,11 @@ Frontend - Python/flask
 Mongodb - Database to save complaints
 
 # Howto install
-1 - Clone repo:
+   # 1 - Clone repo:
     #git clone https://github.com/paulo-amaral/docker-flask-mongodb-API.git
-2 - Build :
+   # 2 - Build :
     #$docker-composer build
-3 - Start and debug:
+   # 3 - Start and debug:
     #$docker-composer up
     
     
