@@ -10,10 +10,10 @@ import os
 #Setup database connection
 from pymongo import MongoClient
 
-#db_uri = os.getenv("MONGODB_URI", 'mongodb://0.0.0.0:27017/rosa_database')
+#db_uri = os.getenv("MONGODB_URI", 'mongodb://0.0.0.0:27017/rosa_database')#Used on heroku
 client = MongoClient('mongodb://db:27017/rosa_database')
 
-#client = MongoClient(db_uri)
+#client = MongoClient(db_uri)# Used on Heroku
 db = client.get_database()
 complaint = db['complaint']
 
