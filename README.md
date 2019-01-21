@@ -52,9 +52,10 @@ Mongodb - Database to save complaints
      $docker-compose up
      
 ## Start NGROK and API(optional)
-After deploy, you can use or setup a NGROK - https://ngrok.com/ 
+After deploy, you can use or setup a NGROK - https://ngrok.com/
+
 This handy tool lets you set up a secure tunnel to your localhost, which is a fancy way of saying it opens access to your local API from the internet:
 
 `
 $./ngrok http 8080
-   
+`   
