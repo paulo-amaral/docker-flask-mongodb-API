@@ -51,4 +51,4 @@ Mongodb - Database to save complaints
    ## 3 - Start and debug:
      $docker-composer up
     
-    
+After deploy, you can use a NGROK - https://ngrok.com/ - This handy tool lets you set up a secure tunnel to your localhost, which is a fancy way of saying it opens access to your local app from the internet.     
