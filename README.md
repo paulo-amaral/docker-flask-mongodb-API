@@ -47,8 +47,8 @@ Mongodb - Database to save complaints
    ## 1 - Clone repo:
      git clone https://github.com/paulo-amaral/docker-flask-mongodb-API.git
    ## 2 - Build :
-     $docker-composer build
+     $docker-compose build
    ## 3 - Start and debug:
-     $docker-composer up
+     $docker-compose up
     
 After deploy, you can use a NGROK - https://ngrok.com/ - This handy tool lets you set up a secure tunnel to your localhost, which is a fancy way of saying it opens access to your local API from the internet.     
