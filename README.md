@@ -20,6 +20,7 @@ This deploy was used for a humanitarian project by (UNWOMEN). This project permi
 
 Check ROSA bot : https://m.me/RosaCFP
 
+Special Thanks to my friend, Lucas Oliveira https://github.com/iolucas.
 
 ## Required Software
 It uses Docker CE and Docker-compose: Compose is a tool for defining and running complex applications with Docker. With Compose, you define a multi-container application in a single file, then spin your application up in a single command which does everything that needs to be done to get it running.
