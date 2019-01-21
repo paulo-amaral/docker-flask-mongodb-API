@@ -50,9 +50,9 @@ Mongodb - Database to save complaints
      $docker-compose build
    ## 3 - Start and debug:
      $docker-compose up
-    
-After deploy, you can use a NGROK - https://ngrok.com/ - This handy tool lets you set up a secure tunnel to your localhost, which is a fancy way of saying it opens access to your local API from the internet. 
-
+     
 ## Start NGROK and API
-   $./ngrok http 8080
+After deploy, you can use a NGROK - https://ngrok.com/ - This handy tool lets you set up a secure tunnel to your         localhost, which is a fancy way of saying it opens access to your local API from the internet:
+```
+$./ngrok http 8080
    
