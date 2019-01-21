@@ -18,7 +18,7 @@ Dev Environment - Python Flask App API with MongoDB using Docker Compose.
 ## Motivation
 This deploy was used for a humanitarian project by (UNWOMEN). This project permits that some people reporting sexual harassment in the public service in TIMOR-LESTE. We have been created a chatbot called ROSA.This Chatbot receives the complaints via API and saves it into a mongodb database for CRUD operations.
 
-Check ROSA bot : https://m.me/RosaCFP
+Check ROSA bot : https://m.me/RosaCFP - Under development.
 
 Special Thanks to my friend, Lucas Oliveira https://github.com/iolucas.
 
