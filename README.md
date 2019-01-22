@@ -40,6 +40,7 @@ $docker-composer build
 $docker-compose up
 
 Docker-compose will build the containers necessary for your environment. Basically there will be two containers, one with Python, Flask and a few modules and another container with MongoDB bound to the first. The environment structure is as follow:
+
 Frontend - Python/flask
 
 Backend - Database to save complaints
