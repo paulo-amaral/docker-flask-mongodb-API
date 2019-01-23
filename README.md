@@ -45,10 +45,6 @@ Frontend - Python/flask
 
 Backend - Database to save complaints
 
-## Deploy on Heroku
-
-[![Heroku Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/paulo-amaral/docker-flask-mongodb-API.git)
-
 
 ## How to install
    ## 1 - Clone repo:
