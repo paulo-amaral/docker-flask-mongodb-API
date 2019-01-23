@@ -1,3 +1,6 @@
+
+LABEL maintainer="Paulo Amaral - paulo.security@gmail.com"
+
 FROM python:3.7
 ADD . /rosa_crud
 WORKDIR /opt/projetos/dev/rosa_crud
