@@ -1,4 +1,5 @@
 
+FROM mongo:latest
 LABEL maintainer="Paulo Amaral - paulo.security@gmail.com"
 
 FROM python:3.7
@@ -14,7 +15,6 @@ RUN pip3 install requests
 
 # Expose the default port
 EXPOSE 27017
-
 
 # Default port to execute the entrypoint (MongoDB)
 # CMD ["--port 27017"]
