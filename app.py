@@ -12,10 +12,10 @@ import os
 import pymongo
 from pymongo import MongoClient
 
-#db_uri = os.getenv("MONGODB_URI", 'mongodb://0.0.0.0:27017/rosa_database')#Used on heroku
-client = MongoClient('mongodb://db:27017/rosa_database')
+db_uri = os.getenv("MONGODB_URI", 'mongodb://localhost:27017/rosa_database') 
+#client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
 
-#client = MongoClient(db_uri)# Used on Heroku
+client = MongoClient(db_uri)
 db = client.get_database()
 complaint = db['complaint']
 
