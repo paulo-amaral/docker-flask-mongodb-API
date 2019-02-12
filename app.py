@@ -4,10 +4,12 @@ app = Flask(__name__)
 import random
 
 from functools import wraps
+from bson.json_util import dumps
 
 import os
 
 #Setup database connection
+import pymongo
 from pymongo import MongoClient
 
 #db_uri = os.getenv("MONGODB_URI", 'mongodb://0.0.0.0:27017/rosa_database')#Used on heroku
@@ -65,6 +67,35 @@ def complaint_list():
          id_list.append(c_obj['_id'])
 
     return jsonify(id_list)
+
+@app.route("/complaint/search")
+@require_appkey
+def complaint_search():
+    limit = 10
+
+    args = {}
+    search_term = request.args.get('search')
+    if search_term is not None and search_term != '':
+        args['$text'] = {'$search': str(request.args.get('search'))}
+
+    if request.args.get('limit') is not None:
+        limit = int(request.args.get('limit'))
+
+    cursor = complaint.find(args).limit(limit)
+
+    if request.args.get('page') is not None:
+        page = int(request.args.get('page'))
+        if page > 1:
+            cursor = cursor.skip((page - 1) * limit)
+
+    cursor.sort([
+        ('anoassedio', pymongo.DESCENDING),
+        ('datassedio', pymongo.DESCENDING)]
+    )
+
+    data = [row for row in cursor]
+
+    return dumps(data)
 
 
 @app.route("/complaint/update/<int:complaint_id>", methods=['POST'])
