@@ -95,8 +95,6 @@ def complaint_search():
 
     data = [row for row in cursor]
 
-    print(data)
-
     return dumps(data)
 
 
