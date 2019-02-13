@@ -2,11 +2,13 @@ from flask import Flask, jsonify, request, abort
 app = Flask(__name__)
 
 import random
+import math
 
 from functools import wraps
 from bson.json_util import dumps
 
 import os
+import unicodecsv as csv
 
 #Setup database connection
 import pymongo
@@ -72,6 +74,8 @@ def complaint_list():
 @require_appkey
 def complaint_search():
     limit = 10
+    page = 1
+    start = 1
 
     args = {}
     search_term = request.args.get('search')
@@ -81,12 +85,18 @@ def complaint_search():
     if request.args.get('limit') is not None:
         limit = int(request.args.get('limit'))
 
-    cursor = complaint.find(args).limit(limit)
+    cursor = complaint.find(args)
+    total = cursor.count(True)
+    
+    cursor = cursor.limit(limit)
 
     if request.args.get('page') is not None:
         page = int(request.args.get('page'))
         if page > 1:
-            cursor = cursor.skip((page - 1) * limit)
+            start = (limit * (page - 1)) + 1
+            cursor = cursor.skip(start)
+
+    end = limit * page
 
     cursor.sort([
         ('anoassedio', pymongo.DESCENDING),
@@ -95,7 +105,17 @@ def complaint_search():
 
     data = [row for row in cursor]
 
-    return dumps(data)
+    json_return = {
+        'total': total,
+        'pages': math.ceil(float(total) / limit) if total > limit else 1,
+        'items': data,
+        'page': page,
+        'start': start,
+        'end': end,
+        'limit': limit
+    }
+
+    return dumps(json_return)
 
 
 @app.route("/complaint/update/<int:complaint_id>", methods=['POST'])
