@@ -17,7 +17,7 @@ import unicodecsv as csv
 import pymongo
 from pymongo import MongoClient
 
-db_uri = os.getenv("MONGODB_URI", 'mongodb://localhost:27017/rosa_database') 
+db_uri = os.getenv("MONGODB_URI", 'mongodb://db:27017/rosa_database') 
 #client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
 
 client = MongoClient(db_uri)
