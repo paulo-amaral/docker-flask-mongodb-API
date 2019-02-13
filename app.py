@@ -1,4 +1,6 @@
-from flask import Flask, jsonify, request, abort
+# encoding=utf8
+
+from flask import Flask, jsonify, request, abort, make_response
 app = Flask(__name__)
 
 import random
@@ -8,13 +10,14 @@ from functools import wraps
 from bson.json_util import dumps
 
 import os
+import io
 import unicodecsv as csv
 
 #Setup database connection
 import pymongo
 from pymongo import MongoClient
 
-db_uri = os.getenv("MONGODB_URI", 'mongodb://localhost:27017/rosa_database') 
+db_uri = os.getenv("MONGODB_URI", 'mongodb://db:27017/rosa_database') 
 #client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
 
 client = MongoClient(db_uri)
@@ -116,6 +119,35 @@ def complaint_search():
     }
 
     return dumps(json_return)
+
+@app.route("/complaint/csv", methods=['GET'])
+@require_appkey
+def complaint_csv():
+    args = {}
+    search_term = request.args.get('search')
+    if search_term is not None and search_term != '':
+        args['$text'] = {'$search': str(request.args.get('search'))}
+
+    cursor = complaint.find(args)
+
+    header = None
+    items = []
+    for item in cursor:
+        if header is None:
+            header = item.keys()
+        row = [unicode(item[key]) for key in header]
+        items.append(row)
+
+    csv_data = [header] + items
+
+    dest = io.BytesIO()
+    writer = csv.writer(dest)
+    writer.writerows(csv_data)
+
+    output = make_response(dest.getvalue())
+    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-type"] = "text/csv"
+    return output
 
 
 @app.route("/complaint/update/<int:complaint_id>", methods=['POST'])
