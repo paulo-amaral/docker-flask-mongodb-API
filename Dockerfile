@@ -12,6 +12,7 @@ RUN pip3 install flask
 RUN pip3 install pymongo 
 RUN pip3 install flask-restful
 RUN pip3 install requests
+RUN pip3 install -U flask-cors
 
 # Expose the default port
 EXPOSE 27017
