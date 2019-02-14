@@ -163,12 +163,11 @@ def complaint_update(complaint_id):
     if request_json == None:
         return jsonify({'error':"No valid JSON body sent."})
 
-    id = ObjectId(complaint_id)
-    complaint_obj = complaint.find_one({"_id": id})
+    complaint_obj = complaint.find_one({"_id": complaint_id})
     if complaint_obj == None:
         return jsonify({'error':"Complaint id not found."})
         
-    complaint.update_one({'_id': id}, {'$set': request_json})
+    complaint.update_one({'_id': complaint_id}, {'$set': request_json})
 
     return jsonify({'status':"updated"})
 
