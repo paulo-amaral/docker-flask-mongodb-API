@@ -16,6 +16,8 @@ import unicodecsv as csv
 #Setup database connection
 import pymongo
 from pymongo import MongoClient
+from bson.objectid import ObjectId
+
 
 db_uri = os.getenv("MONGODB_URI", 'mongodb://db:27017/rosa_database') 
 #client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
@@ -150,7 +152,7 @@ def complaint_csv():
     return output
 
 
-@app.route("/complaint/update/<int:complaint_id>", methods=['POST'])
+@app.route("/complaint/update/<complaint_id>", methods=['POST'])
 @require_appkey
 def complaint_update(complaint_id):
     request_json = request.get_json()
@@ -158,11 +160,12 @@ def complaint_update(complaint_id):
     if request_json == None:
         return jsonify({'error':"No valid JSON body sent."})
 
-    complaint_obj = complaint.find_one({"_id": complaint_id})
+    id = ObjectId(complaint_id)
+    complaint_obj = complaint.find_one({"_id": id})
     if complaint_obj == None:
         return jsonify({'error':"Complaint id not found."})
         
-    complaint.update_one({'_id': complaint_id}, {'$set': request_json})
+    complaint.update_one({'_id': id}, {'$set': request_json})
 
     return jsonify({'status':"updated"})
 
