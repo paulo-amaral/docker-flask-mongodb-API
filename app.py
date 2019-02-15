@@ -61,7 +61,7 @@ def get_new_id():
     return new_id
 
 
-@app.route("/complaint/create", methods=['GET'])
+@app.route("/complaint/create", methods=['GET']) 
 @require_appkey
 def complaint_new():
     new_id = get_new_id()
@@ -172,7 +172,7 @@ def complaint_update(complaint_id):
     return jsonify({'status':"updated"})
 
 
-@app.route("/complaint/status/<int:complaint_id>", methods=['GET'])
+@app.route("/complaint/status/<int:complaint_id>", methods=['GET', 'POST'])
 @require_appkey
 def complaint_status(complaint_id):
 
