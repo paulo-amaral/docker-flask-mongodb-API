@@ -155,7 +155,7 @@ def complaint_csv():
     return output
 
 
-@app.route("/complaint/update/<complaint_id>", methods=['GET', 'POST'])
+@app.route("/complaint/update/<int:complaint_id>", methods=['GET', 'POST'])
 @require_appkey
 def complaint_update(complaint_id):
     request_json = request.get_json()
