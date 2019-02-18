@@ -56,7 +56,7 @@ def get_new_id():
     while complaint.find_one({"_id": random_id}):
         random_id = get_random_id()
         
-    new_id = complaint.insert_one({"_id": random_id, "status":"aberto"}).inserted_id
+    new_id = complaint.insert_one({"_id": random_id, "status":"aberto", "observacao":{}}).inserted_id
     
     return new_id
 
