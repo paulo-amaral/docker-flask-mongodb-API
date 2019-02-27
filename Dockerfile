@@ -21,8 +21,8 @@ RUN pip3 install requests
 RUN pip3 install -U flask-cors
 
 #Install dependencies
+COPY requiremens.txt /opt/projetos/dev/rosa_crud
 WORKDIR /opt/projetos/dev/rosa_crud
-COPY requiremens.txt ./
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Expose the default port
