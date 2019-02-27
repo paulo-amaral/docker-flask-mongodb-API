@@ -11,7 +11,6 @@
 [2]: https://www.facebook.com/paulo.s.amaral
 [3]: http://www.github.com/paulo-amaral
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## DOCKER - FLASK/MONGODB API
 Dev Environment - Python Flask App API with MongoDB using Docker Compose.
