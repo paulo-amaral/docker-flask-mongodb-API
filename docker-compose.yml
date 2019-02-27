@@ -14,3 +14,12 @@ db:
     - "27017:27017"
   volumes:
     - .:/opt/projetos/dev/rosa_crud/data
+    
+ nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
