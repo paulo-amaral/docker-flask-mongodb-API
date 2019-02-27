@@ -34,4 +34,6 @@ EXPOSE 8080
 CMD ["--port 27017", "--smallfiles"]
 
 # Default port to execute the entrypoint (GUNICORN)
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app"]
+CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8080"]
+
+
