@@ -8,6 +8,7 @@ FROM python:3.7
 #create folder
 RUN mkdir -p /opt/projetos
 RUN mkdir -p /opt/projetos/dev
+RUN mkdir -p /opt/projetos/dev/rosa_crud
 
 #Install dependencies
 RUN apt-get update
