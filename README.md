@@ -25,7 +25,12 @@ Check ROSA bot : https://m.me/RosaCFP - Under development.
 ## Required Software
 It uses Docker CE and Docker-compose: Compose is a tool for defining and running complex applications with Docker. With Compose, you define a multi-container application in a single file, then spin your application up in a single command which does everything that needs to be done to get it running.
 
-Install Docker CE :
+### To install, use my personal script (CentOS/Debian/Ubuntu) like this:
+
+https://github.com/paulo-amaral/Install-docker-ce-docker-compose
+
+### Hands-on Install
+Install Docker CE:
 
 https://do.co/2TVqbbH
 
