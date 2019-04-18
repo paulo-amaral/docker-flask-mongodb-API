@@ -8,7 +8,7 @@ FROM python:3.7
 #create folder
 RUN mkdir -p /opt/projetos
 RUN mkdir -p /opt/projetos/dev
-RUN mkdir -p /opt/projetos/dev/rosa_crud
+RUN mkdir -p /opt/projetos/dev/api
 
 #Install dependencies
 RUN apt-get update
@@ -21,8 +21,8 @@ RUN pip3 install requests
 RUN pip3 install -U flask-cors
 
 #Install dependencies
-COPY requirements.txt /opt/projetos/dev/rosa_crud
-WORKDIR /opt/projetos/dev/rosa_crud
+COPY requirements.txt /opt/projetos/dev/api
+WORKDIR /opt/projetos/dev/api
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 # Expose the default port
@@ -33,7 +33,6 @@ EXPOSE 8080
 # CMD ["--port 27017"]
 CMD ["--port 27017", "--smallfiles"]
 
-# Default port to execute the entrypoint (GUNICORN)
-CMD ["gunicorn", "app:app", "-b", "0.0.0.0:8080"]
+
 
 
