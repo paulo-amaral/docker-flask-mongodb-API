@@ -1,17 +1,17 @@
-frontend:
+backend:
   build: .
   command: python3 -u app.py
   ports:
     - "8080:8080"
   volumes:
-    - .:/opt/projetos/dev/rosa_crud
+    - .:/opt/projetos/dev/api
   links:
     - db
 db:
   image: mongo:latest
-  container_name: mongo-crud
+  container_name: MONGO-API
   ports:
     - "27017:27017"
   volumes:
-    - .:/opt/projetos/dev/rosa_crud/data   
+    - .:/opt/projetos/dev/api/data   
  
