@@ -108,7 +108,8 @@ def complaint_search():
 
     cursor.sort([
         ('anoassedio', pymongo.DESCENDING),
-        ('datassedio', pymongo.DESCENDING)]
+   #     ('datassedio', pymongo.DESCENDING)]
+    ]
     )
 
     data = [row for row in cursor]
