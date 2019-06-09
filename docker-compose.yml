@@ -1,18 +1,22 @@
-backend:
+version: '3.3'
+
+services:
+ backend:
   container_name: ROSA-API-BACKEND
   build: .
   command: python3 -u app.py
   ports:
     - "8080:8080"
+  command: gunicorn -w 1 -b :8080 app:app
   volumes:
     - .:/opt/projetos/dev/api
   links:
     - db
-db:
+ db:
   image: mongo:latest
   container_name: MONGO-API
   ports:
     - "27017:27017"
   volumes:
-    - .:/opt/projetos/dev/api/data   
+    - .:/opt/projetos/dev/api/data 
  
