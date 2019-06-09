@@ -35,7 +35,7 @@ EXPOSE 8080
 CMD ["--port 27017", "--smallfiles"]
 
 #Gunicorn 
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app"]
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "wsgi:app"]
 
 
 
