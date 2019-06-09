@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
  backend:
-  container_name: ROSA-API-BACKEND
+  container_name: PYTHON-API-BACKEND
   build: .
   command: python3 -u app.py
   ports:
@@ -14,7 +14,7 @@ services:
     - db
  db:
   image: mongo:latest
-  container_name: MONGO-API
+  container_name: MONGO-API-BACKEND
   ports:
     - "27017:27017"
   volumes:
