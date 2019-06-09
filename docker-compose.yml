@@ -1,4 +1,5 @@
 backend:
+  container_name: ROSA-API-BACKEND
   build: .
   command: python3 -u app.py
   ports:
