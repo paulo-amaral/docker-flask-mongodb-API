@@ -18,6 +18,7 @@ RUN pip3 install flask
 RUN pip3 install pymongo 
 RUN pip3 install flask-restful
 RUN pip3 install requests
+RUN pip3 install gunicorn
 RUN pip3 install -U flask-cors
 
 #Install dependencies
@@ -29,9 +30,12 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 EXPOSE 27017
 EXPOSE 8080
 
-# Default port to execute the entrypoint (MongoDB)
-# CMD ["--port 27017"]
+#Default port to execute the entrypoint (MongoDB)
+#CMD ["--port 27017"]
 CMD ["--port 27017", "--smallfiles"]
+
+#Gunicorn 
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "app"]
 
 
 
