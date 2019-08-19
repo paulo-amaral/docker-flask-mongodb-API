@@ -18,16 +18,17 @@ import unicodecsv as csv
 
 #Setup database connection
 import pymongo
-from pymongo import MongoClient
+from pymongo import MongoClient, ReturnDocument
 from bson.objectid import ObjectId
 
 
-db_uri = os.getenv("MONGODB_URI", 'mongodb://db:27017/rosa_database') 
+db_uri = os.getenv("MONGODB_URI", 'mongodb://localhost:27017/rosa_database') 
 #client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
 
 client = MongoClient(db_uri)
 db = client.get_database()
 complaint = db['complaint']
+counters = db['counters']
 
 #Setup api key and decorator
 APPKEY_HERE = os.getenv("ROSA_CRUD_KEY", 'ROSABOT')
@@ -52,13 +53,21 @@ def get_random_id():
     return random.randint(10000, 99999)
 
 def get_new_id():
-    random_id = get_random_id()
-    while complaint.find_one({"_id": random_id}):
-        random_id = get_random_id()
+    new_comp_id = get_new_inc_id()
+    #Ensures non repeat id
+    while complaint.find_one({"_id": new_comp_id}):
+        new_comp_id = get_new_inc_id()
         
-    new_id = complaint.insert_one({"_id": random_id, "status":'', "observacao":''}).inserted_id
+    new_id = complaint.insert_one({"_id": new_comp_id, "status":'', "observacao":''}).inserted_id
     
     return new_id
+
+def get_new_inc_id():
+    """Return a new incremental id, updating the last count in the database."""
+    return counters.find_one_and_update(
+        {'_id': 'complaintid'},
+        {'$inc': {'sequence_value': 1}},
+        return_document=ReturnDocument.AFTER)['sequence_value']
 
 
 @app.route("/complaint/create", methods=['GET']) 
