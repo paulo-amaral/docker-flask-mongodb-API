@@ -160,9 +160,10 @@ def complaint_csv():
         items.append(row)
 
     csv_data = [header] + items
-
+   
     dest = io.BytesIO()
-    writer = csv.writer(dest)
+    #writer = csv.writer(dest)
+    writer = csv.writer(dest, delimiter=',')
     writer.writerows(csv_data)
 
     output = make_response(dest.getvalue())
