@@ -163,8 +163,9 @@ def complaint_csv():
    
     dest = io.BytesIO()
     #writer = csv.writer(dest)
-    writer = csv.writer(dest, delimiter=',')
+    writer = csv.writer(dest, delimiter=',') 
     writer.writerows(csv_data)
+    csv_data = csv_data.encode('utf-8')
 
     output = make_response(dest.getvalue())
     output.headers["Content-Disposition"] = "attachment; filename=export.csv"
