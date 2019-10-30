@@ -34,9 +34,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "/login"
 
-logged_users = dict()
-
-
 db_uri = os.getenv("MONGODB_URI", 'mongodb://localhost:27017/rosa_database') 
 #client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
 
