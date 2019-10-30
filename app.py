@@ -64,11 +64,15 @@ def get_new_id():
 
 def get_new_inc_id():
     """Return a new incremental id, updating the last count in the database."""
-    return counters.find_one_and_update(
+    #return counters.find_one_and_update(
+    #    {'_id': 'complaintid'},
+    #    {'$inc': {'sequence_value': 1}},
+    #    return_document=ReturnDocument.AFTER)['sequence_value']
+
+    return int(counters.find_one_and_update(
         {'_id': 'complaintid'},
         {'$inc': {'sequence_value': 1}},
-        return_document=ReturnDocument.AFTER)['sequence_value']
-
+        return_document=ReturnDocument.AFTER)['sequence_value'])
 
 @app.route("/complaint/create", methods=['GET']) 
 @require_appkey
