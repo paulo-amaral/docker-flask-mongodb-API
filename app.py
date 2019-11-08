@@ -1,9 +1,12 @@
 #encoding=utf8
 
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort, make_response, render_template, redirect
 from flask_cors import CORS, cross_origin
 
+import random
+
 app = Flask(__name__)
+app.secret_key = str(random.randint(0,999999999))
 CORS(app) # CORS feature cover all routes in the app
 
 import random
@@ -11,6 +14,8 @@ import math
 
 from functools import wraps
 from bson.json_util import dumps
+
+import json
 
 import os
 import io
@@ -22,6 +27,13 @@ from pymongo import MongoClient, ReturnDocument
 from bson.objectid import ObjectId
 
 
+#Authorization things
+from create_user import hash_pass
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "/login"
+
 db_uri = os.getenv("MONGODB_URI", 'mongodb://localhost:27017/rosa_database') 
 #client = MongoClient('mongodb://db:27017/rosa_database')# used in docker deploy 
 
@@ -29,9 +41,52 @@ client = MongoClient(db_uri)
 db = client.get_database()
 complaint = db['complaint']
 counters = db['counters']
+users = db['users']
 
 #Setup api key and decorator
 APPKEY_HERE = os.getenv("ROSA_CRUD_KEY", 'ROSABOT')
+
+
+class RosaUser(UserMixin):
+    def __init__(self, username):
+        super().__init__()
+        self._id = username.encode()
+    def get_id(self):
+        return self._id
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return RosaUser(user_id.decode())
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    elif request.method == 'POST':
+        if not request.form['username'] or not request.form['password']:
+            return "Missing username and/or password."
+
+        username = request.form['username']
+        password = hash_pass(request.form['password'])
+
+        user = users.find_one({"username": username})
+        if user == None or user['password'] != password:
+            return "Username or password wrong."
+        
+        login_user(RosaUser(username))
+
+        return redirect("/logout")
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    if request.method == 'POST':
+        logout_user()
+        return redirect('/login')
+    else:
+        return render_template('logout.html')
 
 # The actual decorator function
 def require_appkey(view_function):
@@ -47,7 +102,10 @@ def require_appkey(view_function):
 
 @app.route("/")
 def root_page():
-    return "ROSABOT"
+    if current_user.is_authenticated:
+        return redirect("/logout")
+    else:
+        return redirect("/login")
 
 def get_random_id():
     return random.randint(10000, 99999)
@@ -82,16 +140,32 @@ def complaint_new():
 
 
 @app.route("/complaint/list")
+@login_required
 @require_appkey
 def complaint_list():
     id_list = list()
 
     for c_obj in complaint.find():
-         id_list.append(c_obj['_id'])
+        if is_jsonable(c_obj):
+            id_list.append(c_obj['_id'])
 
     return jsonify(id_list)
 
+
+
+def is_jsonable(x):
+    """
+    Function to check if an object can dumped as json.
+    Ensures API only returns valid objects and do not crashes.
+    """
+    try:
+        json.dumps(x)
+        return True
+    except:
+        return False
+
 @app.route("/complaint/search")
+@login_required
 @require_appkey
 def complaint_search():
     limit = 10
@@ -142,6 +216,7 @@ def complaint_search():
     return dumps(json_return)
 
 @app.route("/complaint/csv", methods=['GET'])
+@login_required
 @require_appkey
 def complaint_csv():
     args = {}
