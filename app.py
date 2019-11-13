@@ -120,7 +120,7 @@ def complaint_search():
     end = limit * page
 
     cursor.sort([
-        ('id', pymongo.DESCENDING),
+        ('_id', pymongo.DESCENDING),
         ('anoassedio', pymongo.DESCENDING),
         ('datassedio', pymongo.DESCENDING)]
     
