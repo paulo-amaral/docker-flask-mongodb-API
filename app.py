@@ -156,15 +156,15 @@ def complaint_csv():
         if header is None:
             header = item.keys()
             
-        row = [item[key] for key in header]
-        #row = [item.get(key, " ") for key in header]
+        #row = [item[key] for key in header]
+        row = [item.get(key, " ") for key in header]
         items.append(row)
 
     csv_data = [header] + items
    
     dest = io.BytesIO()
-    writer = csv.writer(dest)
-    #writer = csv.writer(dest, delimiter=',') 
+    #writer = csv.writer(dest)
+    writer = csv.writer(dest, delimiter=',') 
     writer.writerows(csv_data)
     
 
