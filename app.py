@@ -31,7 +31,7 @@ complaint = db['complaint']
 counters = db['counters']
 
 #Setup api key and decorator
-APPKEY_HERE = os.getenv("ROSA_CRUD_KEY", 'ROSABOT')
+APPKEY_HERE = os.getenv("ROSA_CRUD_KEY", 'BOT') #Change this Key
 
 # The actual decorator function
 def require_appkey(view_function):
